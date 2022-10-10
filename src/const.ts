@@ -4,5 +4,6 @@ export const ConnectionParams = {
 };
 
 export const APIRoute = {
-  Cameras: '/cameras'
+  Cameras: '/cameras',
+  Promo: '/promo',
 };
