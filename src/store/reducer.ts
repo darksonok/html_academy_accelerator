@@ -7,7 +7,7 @@ export const initialState: InitialState = {
   isCamerasLoading: true,
   cameras: [],
   promo: {} as Promo,
-  isPromoLoading: true
+  isPromoLoading: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {

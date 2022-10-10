@@ -9,5 +9,5 @@ export {
   getCamerasLoadingStatus,
   getCameras,
   getPromo,
-  getPromoLoadingStatus
+  getPromoLoadingStatus,
 };
