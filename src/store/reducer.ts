@@ -1,10 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { InitialState } from '../types/initial-state';
-import { changeCameraLoadingStatus, loadCameras } from './actions';
+import { Promo } from '../types/Promo';
+import { changeCameraLoadingStatus, changePromoLoadingStatus, loadCameras, loadPromo } from './actions';
 
 export const initialState: InitialState = {
   isCamerasLoading: true,
-  cameras: []
+  cameras: [],
+  promo: {} as Promo,
+  isPromoLoading: true
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -14,6 +17,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeCameraLoadingStatus, (state, action) => {
       state.isCamerasLoading = action.payload;
+    })
+    .addCase(loadPromo, (state, action) => {
+      state.promo = action.payload;
+    })
+    .addCase(changePromoLoadingStatus, (state, action) => {
+      state.isPromoLoading = action.payload;
     });
 });
 
