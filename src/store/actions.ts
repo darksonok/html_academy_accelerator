@@ -17,3 +17,4 @@ export const loadPromo = createAction('goods/promo', (promo: Promo) => ({
 export const changePromoLoadingStatus = createAction('goods/promoLoadingStatus', (promoLoadingStatus: boolean) => ({
   payload: promoLoadingStatus
 }));
+

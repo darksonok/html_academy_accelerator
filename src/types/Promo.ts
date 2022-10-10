@@ -4,5 +4,5 @@ export type Promo = {
   previewImg: string;
   previewImg2x: string;
   previewImgWebp: string;
-  previewImgWebp2x: string
+  previewImgWebp2x: string;
 }
