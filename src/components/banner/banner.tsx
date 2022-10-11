@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { getPromo, getPromoLoadingStatus } from '../../store/selectors';
 
@@ -16,7 +17,12 @@ function Banner () {
           <span className="banner__message">Новинка!</span>
           <span className="title title--h1">{promo.name}</span>
           <span className="banner__text"></span>
-          <a className="btn" href="#">Подробнее</a>
+          <Link
+            className="btn"
+            to={`item/${promo.id}`}
+          >
+              Подробнее
+          </Link>
         </p>
       </div>
   );

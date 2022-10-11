@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom';
+import { NUMBER_OF_RATING_STARS_VALUE } from '../../const';
 import { Camera } from '../../types/Camera';
 
 type CameraCardProps = {
   cameraCard: Camera;
+  onAddClick: (cameraCard: Camera) => void;
 }
 
-function CameraCard ({cameraCard}: CameraCardProps) {
+function CameraCard ({cameraCard, onAddClick}: CameraCardProps) {
   return (
     <div className="product-card">
       <div className="product-card__img">
@@ -12,21 +15,11 @@ function CameraCard ({cameraCard}: CameraCardProps) {
       </div>
       <div className="product-card__info">
         <div className="rate product-card__rate">
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
+          {NUMBER_OF_RATING_STARS_VALUE.map((ratingStar) => (
+            <svg key={`${ratingStar}-rating`} width="17" height="16" aria-hidden="true">
+              <use xlinkHref={ratingStar <= cameraCard.rating ? '#icon-full-star' : '#icon-star'}></use>
+            </svg>
+          ))}
           <p className="visually-hidden">Рейтинг: {cameraCard.rating}</p>
           <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{cameraCard.reviewCount}</p>
         </div>
@@ -35,10 +28,18 @@ function CameraCard ({cameraCard}: CameraCardProps) {
         </p>
       </div>
       <div className="product-card__buttons">
-        <button className="btn btn--purple product-card__btn" type="button">Купить
+        <button
+          className="btn btn--purple product-card__btn"
+          type="button"
+          onClick={() => onAddClick(cameraCard)}
+        >
+          Купить
         </button>
-        <a className="btn btn--transparent" href="#">Подробнее
-        </a>
+        <Link
+          className="btn btn--transparent"
+          to={`/item/${cameraCard.id}`}
+        >Подробнее
+        </Link>
       </div>
     </div>
   );
