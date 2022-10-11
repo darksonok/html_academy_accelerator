@@ -16,7 +16,7 @@ export enum AppRoute {
 
 const NUMBER_OF_CARDS_TO_PAGINATE = 9;
 
-const NUMBER_OF_RATING_STARS_VALUE = [1,2,3,4,5];
+const NumberOfRatingStarsValue = [1,2,3,4,5];
 
 const BreadcrumbsPaths = {
   catalog: {
@@ -25,9 +25,15 @@ const BreadcrumbsPaths = {
   }
 };
 
+const TabsValues = {
+  Description: 'Описание',
+  Characteristics: 'Характеристики'
+};
+
 export {
   NUMBER_OF_CARDS_TO_PAGINATE,
-  NUMBER_OF_RATING_STARS_VALUE,
-  BreadcrumbsPaths
+  NumberOfRatingStarsValue,
+  BreadcrumbsPaths,
+  TabsValues
 };
 
