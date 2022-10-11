@@ -9,7 +9,7 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Pagination from '../../components/pagination/pagination';
 import Sorter from '../../components/sorter/sorter';
-import { NUMBER_OF_CARDS_TO_PAGINATE } from '../../const';
+import { BreadcrumbsPaths, NUMBER_OF_CARDS_TO_PAGINATE } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getCameras } from '../../store/selectors';
 import { Camera } from '../../types/Camera';
@@ -34,7 +34,7 @@ function Catalog () {
       <main>
         <Banner />
         <div className="page-content">
-          <Breadcrumbs />
+          <Breadcrumbs secondPath={BreadcrumbsPaths.catalog}/>
           <section className="catalog">
             <div className="container">
               <h1 className="title title--h2">Каталог фото- и видеотехники</h1>

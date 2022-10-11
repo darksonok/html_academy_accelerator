@@ -18,8 +18,16 @@ const NUMBER_OF_CARDS_TO_PAGINATE = 9;
 
 const NUMBER_OF_RATING_STARS_VALUE = [1,2,3,4,5];
 
+const BreadcrumbsPaths = {
+  catalog: {
+    name: 'Каталог',
+    path: '/1',
+  }
+};
+
 export {
   NUMBER_OF_CARDS_TO_PAGINATE,
-  NUMBER_OF_RATING_STARS_VALUE
+  NUMBER_OF_RATING_STARS_VALUE,
+  BreadcrumbsPaths
 };
 

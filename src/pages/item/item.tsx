@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import AddItemModal from '../../components/add-item-modal/add-item-modal';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Rating from '../../components/rating/rating';
+import { BreadcrumbsPaths } from '../../const';
 import { fetchChosenItem } from '../../services/api';
 import { Camera } from '../../types/Camera';
 
@@ -11,6 +14,7 @@ function Item () {
   const { id } = useParams();
   const [isItemLoading, setItemLoadingStatus] = useState(true);
   const [item, setItem] = useState({} as Camera);
+  const [isAddItemModalOpened, setAddItemModalOpenStatus] = useState(false);
 
   useEffect(() => {
     fetchChosenItem(Number(id), setItemLoadingStatus, setItem);
@@ -24,28 +28,7 @@ function Item () {
         <Header />
         <main>
           <div className="page-content">
-            <div className="breadcrumbs">
-              <div className="container">
-                <ul className="breadcrumbs__list">
-                  <li className="breadcrumbs__item">
-                    <Link className="breadcrumbs__link" to={'/'}>Главная
-                      <svg width="5" height="8" aria-hidden="true">
-                        <use xlinkHref="#icon-arrow-mini"></use>
-                      </svg>
-                    </Link>
-                  </li>
-                  <li className="breadcrumbs__item">
-                    <Link className="breadcrumbs__link" to='/1'>Каталог
-                      <svg width="5" height="8" aria-hidden="true">
-                        <use xlinkHref="#icon-arrow-mini"></use>
-                      </svg>
-                    </Link>
-                  </li>
-                  <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active">{item.name}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <Breadcrumbs secondPath={BreadcrumbsPaths.catalog} thirdPath={item.name} />
             <div className="page-content__section">
               <section className="product">
                 <div className="container">
@@ -60,7 +43,11 @@ function Item () {
                       <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{item.reviewCount}</p>
                     </div>
                     <p className="product__price"><span className="visually-hidden">Цена:</span>{item.price} ₽</p>
-                    <button className="btn btn--purple" type="button">
+                    <button
+                      className="btn btn--purple"
+                      type="button"
+                      onClick={() => setAddItemModalOpenStatus(true)}
+                    >
                       <svg width="24" height="16" aria-hidden="true">
                         <use xlinkHref="#icon-add-basket"></use>
                       </svg>Добавить в корзину
@@ -451,6 +438,14 @@ function Item () {
               </section>
             </div>
           </div>
+          {isAddItemModalOpened
+           &&
+           <AddItemModal
+             cameraCard={item}
+             onCloseButtonClick={setAddItemModalOpenStatus}
+             modifiedSrc={`../${item.previewImg}`}
+             modifiedSrc2x={`../${item.previewImg2x}`}
+           />}
         </main>
         <a className="up-btn" href="#header">
           <svg width="12" height="18" aria-hidden="true">
