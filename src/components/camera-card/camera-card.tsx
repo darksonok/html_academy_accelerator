@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { NUMBER_OF_RATING_STARS_VALUE } from '../../const';
 import { Camera } from '../../types/Camera';
+import Rating from '../rating/rating';
 
 type CameraCardProps = {
   cameraCard: Camera;
@@ -15,11 +15,7 @@ function CameraCard ({cameraCard, onAddClick}: CameraCardProps) {
       </div>
       <div className="product-card__info">
         <div className="rate product-card__rate">
-          {NUMBER_OF_RATING_STARS_VALUE.map((ratingStar) => (
-            <svg key={`${ratingStar}-rating`} width="17" height="16" aria-hidden="true">
-              <use xlinkHref={ratingStar <= cameraCard.rating ? '#icon-full-star' : '#icon-star'}></use>
-            </svg>
-          ))}
+          <Rating currentRating={cameraCard.rating} />
           <p className="visually-hidden">Рейтинг: {cameraCard.rating}</p>
           <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{cameraCard.reviewCount}</p>
         </div>
