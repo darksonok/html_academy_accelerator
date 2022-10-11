@@ -12,6 +12,7 @@ function Main () {
           <section className="catalog">
             <div className="container">
               <h1 className="title title--h2">Привет, это главная страница, но ее дизайна не было, по этому пока вот так, лучше ткните на каталог</h1>
+              <h2> Кстати там наверху еще камера крутая </h2>
             </div>
           </section>
         </div>

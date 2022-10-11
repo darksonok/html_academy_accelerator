@@ -30,10 +30,13 @@ const TabsValues = {
   Characteristics: 'Характеристики'
 };
 
+const SIMILAR_ITEMS_SHOW_STEP = 1;
+
 export {
   NUMBER_OF_CARDS_TO_PAGINATE,
   NumberOfRatingStarsValue,
   BreadcrumbsPaths,
-  TabsValues
+  TabsValues,
+  SIMILAR_ITEMS_SHOW_STEP
 };
 

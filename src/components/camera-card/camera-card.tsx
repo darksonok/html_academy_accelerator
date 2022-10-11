@@ -5,13 +5,25 @@ import Rating from '../rating/rating';
 type CameraCardProps = {
   cameraCard: Camera;
   onAddClick: (cameraCard: Camera) => void;
+  modifiedSrc?: string;
+  modifiedSrc2x?: string;
+  shownSimilarItems?: number[];
+  cardNumber?: number;
 }
 
-function CameraCard ({cameraCard, onAddClick}: CameraCardProps) {
+function CameraCard ({cameraCard, onAddClick, modifiedSrc, modifiedSrc2x, shownSimilarItems, cardNumber}: CameraCardProps) {
   return (
-    <div className="product-card">
+    <div
+      className={shownSimilarItems?.filter((similarItem) => similarItem === cardNumber).length !== 0 ? 'product-card is-active' : 'product-card'}
+    >
       <div className="product-card__img">
-        <img src={cameraCard.previewImg} srcSet={cameraCard.previewImg2x} width="280" height="240" alt={cameraCard.name} />
+        <img
+          src={modifiedSrc ? modifiedSrc : cameraCard.previewImg}
+          srcSet={modifiedSrc2x ? modifiedSrc2x : cameraCard.previewImg2x}
+          width="280"
+          height="240"
+          alt={cameraCard.name}
+        />
       </div>
       <div className="product-card__info">
         <div className="rate product-card__rate">

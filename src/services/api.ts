@@ -24,3 +24,16 @@ export const fetchChosenItem = async (
     }
     );
 };
+
+export const fetchSimilarItems = async (
+  id: number,
+  callbackForSetItemLoadingStatus: React.Dispatch<React.SetStateAction<boolean>>,
+  callbackForSetItem: React.Dispatch<React.SetStateAction<Camera[]>>,
+) => {
+  await api.get<Camera[]>(`${APIRoute.Cameras}/${id}/similar`)
+    .then( ({data}) => {
+      callbackForSetItemLoadingStatus(false);
+      callbackForSetItem(data);
+    }
+    );
+};
