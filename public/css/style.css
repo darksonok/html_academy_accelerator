@@ -3394,9 +3394,9 @@ button,
 }
 
 .up-btn {
-  position: absolute;
-  right: 22px;
-  bottom: 330px;
+  position: sticky;
+  left: 95%;
+  bottom: 100px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;

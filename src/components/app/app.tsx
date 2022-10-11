@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import Catalog from '../../pages/catalog/catalog';
+import Item from '../../pages/item/item';
 import { getCamerasLoadingStatus } from '../../store/selectors';
 
 function App(): JSX.Element {
@@ -20,6 +21,10 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.CatalogPage}
             element={<Catalog />}
+          />
+          <Route
+            path={AppRoute.Item}
+            element={<Item />}
           />
         </Routes>
       </BrowserRouter>

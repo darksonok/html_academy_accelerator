@@ -10,7 +10,7 @@ export const APIRoute = {
 
 export enum AppRoute {
   Main = '/',
-  Item ='/item/:pageId',
+  Item ='/item/:id',
   CatalogPage = '/:pageId'
 }
 
