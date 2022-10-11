@@ -14,6 +14,7 @@ function SimilarItems () {
 
   useEffect(() => {
     fetchSimilarItems(Number(id), setSimilarItemsLoadingStatus, setSimilarItems);
+    return (() => setShownSimilarItems([0,1,2]));
   }, [id]);
 
   return (
