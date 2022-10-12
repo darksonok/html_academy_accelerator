@@ -1,6 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { APIRoute, ConnectionParams } from '../const';
+import { NavigateFunction } from 'react-router-dom';
+import { APIRoute, AppRoute, ConnectionParams, StatusCodes } from '../const';
 import { Camera } from '../types/Camera';
+import { HttpErrors } from '../types/HttpErrors';
 import { Review, ReviewPost } from '../types/Review';
 
 const options: AxiosRequestConfig = {
@@ -17,11 +19,17 @@ export const fetchChosenItem = async (
   id: number,
   callbackForSetItemLoadingStatus: React.Dispatch<React.SetStateAction<boolean>>,
   callbackForSetItem: React.Dispatch<React.SetStateAction<Camera>>,
+  calbackForNavigate: NavigateFunction
 ) => {
   await api.get<Camera>(`${APIRoute.Cameras}/${id}`)
     .then( ({data}) => {
       callbackForSetItemLoadingStatus(false);
       callbackForSetItem(data);
+    },
+    (error: HttpErrors) => {
+      if (error.response.status === StatusCodes.NOT_FOUND) {
+        calbackForNavigate(AppRoute.NotFound);
+      }
     }
     );
 };

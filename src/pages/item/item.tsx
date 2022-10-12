@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import AddItemModal from '../../components/add-item-modal/add-item-modal';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Footer from '../../components/footer/footer';
@@ -19,6 +19,7 @@ function Item () {
   const [item, setItem] = useState({} as Camera);
   const [isAddItemModalOpened, setAddItemModalOpenStatus] = useState(false);
   const [chosenCameraCard, setChosenCameraCard] = useState({} as Camera);
+  const navigate = useNavigate();
 
   const onAddClick = (cameraCard: Camera) => {
     setAddItemModalOpenStatus(true);
@@ -26,8 +27,8 @@ function Item () {
   };
 
   useEffect(() => {
-    fetchChosenItem(Number(id), setItemLoadingStatus, setItem);
-  }, [id]);
+    fetchChosenItem(Number(id), setItemLoadingStatus, setItem, navigate);
+  }, [id, navigate]);
 
   return (
     isItemLoading

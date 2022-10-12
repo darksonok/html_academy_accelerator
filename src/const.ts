@@ -12,7 +12,8 @@ export const APIRoute = {
 export enum AppRoute {
   Main = '/',
   Item ='/item/:id',
-  CatalogPage = '/:pageId'
+  CatalogPage = '/catalog/:pageId',
+  NotFound = '/not_found',
 }
 
 const NUMBER_OF_CARDS_TO_PAGINATE = 9;
@@ -22,7 +23,7 @@ const NumberOfRatingStarsValue = [1,2,3,4,5];
 const BreadcrumbsPaths = {
   catalog: {
     name: 'Каталог',
-    path: '/1',
+    path: '/catalog/1',
   }
 };
 
@@ -66,6 +67,10 @@ const HumanazeRatingMap = [
 
 const NORMILIZE_CONSTANT_FOR_REVIEW_FORM = 6;
 
+const StatusCodes = {
+  NOT_FOUND: 404
+};
+
 export {
   NUMBER_OF_CARDS_TO_PAGINATE,
   NumberOfRatingStarsValue,
@@ -78,6 +83,7 @@ export {
   INITIAL_SHOWN_REVIEWS,
   REVIEW_TO_SHOW_STEP,
   HumanazeRatingMap,
-  NORMILIZE_CONSTANT_FOR_REVIEW_FORM
+  NORMILIZE_CONSTANT_FOR_REVIEW_FORM,
+  StatusCodes
 };
 

@@ -18,7 +18,7 @@ function Header () {
             <li className="main-nav__item">
               <Link
                 className="main-nav__link"
-                to={'/1'}
+                to={'/catalog/1'}
               >
                 Каталог
               </Link>

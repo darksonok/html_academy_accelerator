@@ -19,7 +19,7 @@ function Banner () {
           <span className="banner__text"></span>
           <Link
             className="btn"
-            to={`item/${promo.id}`}
+            to={`/item/${promo.id}`}
           >
               Подробнее
           </Link>
