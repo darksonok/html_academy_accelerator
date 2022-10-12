@@ -17,6 +17,12 @@ function Item () {
   const [isItemLoading, setItemLoadingStatus] = useState(true);
   const [item, setItem] = useState({} as Camera);
   const [isAddItemModalOpened, setAddItemModalOpenStatus] = useState(false);
+  const [chosenCameraCard, setChosenCameraCard] = useState({} as Camera);
+
+  const onAddClick = (cameraCard: Camera) => {
+    setAddItemModalOpenStatus(true);
+    setChosenCameraCard(cameraCard);
+  };
 
   useEffect(() => {
     fetchChosenItem(Number(id), setItemLoadingStatus, setItem);
@@ -48,7 +54,7 @@ function Item () {
                     <button
                       className="btn btn--purple"
                       type="button"
-                      onClick={() => setAddItemModalOpenStatus(true)}
+                      onClick={() => onAddClick(item)}
                     >
                       <svg width="24" height="16" aria-hidden="true">
                         <use xlinkHref="#icon-add-basket"></use>
@@ -60,7 +66,9 @@ function Item () {
               </section>
             </div>
             <div className="page-content__section">
-              <SimilarItems />
+              <SimilarItems
+                onAddClick={onAddClick}
+              />
             </div>
             <div className="page-content__section">
               <section className="review-block">
@@ -187,10 +195,8 @@ function Item () {
           {isAddItemModalOpened
            &&
            <AddItemModal
-             cameraCard={item}
+             cameraCard={chosenCameraCard}
              onCloseButtonClick={setAddItemModalOpenStatus}
-             modifiedSrc={`../${item.previewImg}`}
-             modifiedSrc2x={`../${item.previewImg2x}`}
            />}
         </main>
         <a className="up-btn" href="#header">

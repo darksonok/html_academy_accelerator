@@ -31,12 +31,16 @@ const TabsValues = {
 };
 
 const SIMILAR_ITEMS_SHOW_STEP = 1;
+const InitialSimilarItemToShow = [0,1,2];
+const NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW = 0;
 
 export {
   NUMBER_OF_CARDS_TO_PAGINATE,
   NumberOfRatingStarsValue,
   BreadcrumbsPaths,
   TabsValues,
-  SIMILAR_ITEMS_SHOW_STEP
+  SIMILAR_ITEMS_SHOW_STEP,
+  InitialSimilarItemToShow,
+  NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW
 };
 
