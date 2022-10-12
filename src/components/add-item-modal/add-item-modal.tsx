@@ -2,12 +2,10 @@ import { Camera } from '../../types/Camera';
 
 type AddItemModalProps = {
   cameraCard: Camera;
-  modifiedSrc?: string;
-  modifiedSrc2x?: string;
   onCloseButtonClick: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function AddItemModal ( { cameraCard, onCloseButtonClick, modifiedSrc, modifiedSrc2x }: AddItemModalProps) {
+function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
   return (
     <div className="modal is-active">
       <div className="modal__wrapper">
@@ -17,8 +15,8 @@ function AddItemModal ( { cameraCard, onCloseButtonClick, modifiedSrc, modifiedS
           <div className="basket-item basket-item--short">
             <div className="basket-item__img">
               <img
-                src={modifiedSrc ? modifiedSrc : cameraCard.previewImg}
-                srcSet={modifiedSrc2x ? modifiedSrc2x : cameraCard.previewImg2x}
+                src={`/${cameraCard.previewImg}`}
+                srcSet={`/${cameraCard.previewImg2x}`}
                 width="140"
                 height="120"
                 alt={cameraCard.name}

@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { SIMILAR_ITEMS_SHOW_STEP } from '../../const';
+import { InitialSimilarItemToShow, NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW, SIMILAR_ITEMS_SHOW_STEP } from '../../const';
 import { fetchSimilarItems } from '../../services/api';
 import { Camera } from '../../types/Camera';
 import CameraCard from '../camera-card/camera-card';
 
-function SimilarItems () {
+type SimilarItemsProps = {
+  onAddClick: (cameraCard: Camera) => void;
+}
+
+function SimilarItems ({ onAddClick }: SimilarItemsProps) {
 
   const { id } = useParams();
   const [isSimilarItemsLoading, setSimilarItemsLoadingStatus] = useState(true);
   const [similarItems, setSimilarItems] = useState([] as Camera[]);
-  const [shownSimilarItems, setShownSimilarItems] = useState([0,1,2]);
+  const [shownSimilarItems, setShownSimilarItems] = useState(InitialSimilarItemToShow);
 
   useEffect(() => {
     fetchSimilarItems(Number(id), setSimilarItemsLoadingStatus, setSimilarItems);
-    return (() => setShownSimilarItems([0,1,2]));
+    return (() => setShownSimilarItems(InitialSimilarItemToShow));
   }, [id]);
 
   return (
@@ -30,9 +34,7 @@ function SimilarItems () {
                 <CameraCard
                   key={`similar-${similarItem.id}`}
                   cameraCard={similarItem}
-                  onAddClick={() => null}
-                  modifiedSrc={`../${similarItem.previewImg}`}
-                  modifiedSrc2x={`../${similarItem.previewImg2x}`}
+                  onAddClick={() => onAddClick(similarItem)}
                   cardNumber={index}
                   shownSimilarItems={shownSimilarItems}
                 />))}
@@ -42,7 +44,7 @@ function SimilarItems () {
               type="button"
               aria-label="Предыдущий слайд"
               onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item - SIMILAR_ITEMS_SHOW_STEP))}
-              disabled={shownSimilarItems[0] === 0}
+              disabled={shownSimilarItems[0] === NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW}
             >
               <svg width="7" height="12" aria-hidden="true">
                 <use xlinkHref="#icon-arrow"></use>
