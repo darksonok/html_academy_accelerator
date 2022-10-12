@@ -58,8 +58,6 @@ export const postReview = async (
 ) => {
   await api.post<ReviewPost>(APIRoute.Reviews, review)
     .then( () => {
-      // eslint-disable-next-line no-console
-      console.log('успех');
       callbackForSuccessMessage(true);
     }
     );
