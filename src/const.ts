@@ -33,6 +33,12 @@ const TabsValues = {
 const SIMILAR_ITEMS_SHOW_STEP = 1;
 const InitialSimilarItemToShow = [0,1,2];
 const NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW = 0;
+const MonthsInParentCase = [
+  'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля',
+  'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
+];
+const INITIAL_SHOWN_REVIEWS = 3;
+const REVIEW_TO_SHOW_STEP = 3;
 
 export {
   NUMBER_OF_CARDS_TO_PAGINATE,
@@ -41,6 +47,9 @@ export {
   TabsValues,
   SIMILAR_ITEMS_SHOW_STEP,
   InitialSimilarItemToShow,
-  NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW
+  NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW,
+  MonthsInParentCase,
+  INITIAL_SHOWN_REVIEWS,
+  REVIEW_TO_SHOW_STEP
 };
 

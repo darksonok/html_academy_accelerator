@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { APIRoute, ConnectionParams } from '../const';
 import { Camera } from '../types/Camera';
+import { Review } from '../types/Review';
 
 const options: AxiosRequestConfig = {
   baseURL: String(ConnectionParams.baseURL),
@@ -34,6 +35,19 @@ export const fetchSimilarItems = async (
     .then( ({data}) => {
       callbackForSetItemLoadingStatus(false);
       callbackForSetItem(data);
+    }
+    );
+};
+
+export const fetchIremReviews = async (
+  id: number,
+  callbackForSetReviewLoadingStatus: React.Dispatch<React.SetStateAction<boolean>>,
+  callbackForSetReviews: React.Dispatch<React.SetStateAction<Review[]>>,
+) => {
+  await api.get<Review[]>(`${APIRoute.Cameras}/${id}/reviews`)
+    .then( ({data}) => {
+      callbackForSetReviewLoadingStatus(false);
+      callbackForSetReviews(data);
     }
     );
 };
