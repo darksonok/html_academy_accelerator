@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 function Footer () {
   return (
@@ -17,21 +18,21 @@ function Footer () {
           <p className="footer__description">Интернет-магазин фото- и видеотехники</p>
           <ul className="social">
             <li className="social__item">
-              <a className="link" href="#" aria-label="Переход на страницу вконтатке">
+              <a className="link" href="https://vk.com" aria-label="Переход на страницу вконтатке">
                 <svg width="20" height="20" aria-hidden="true">
                   <use xlinkHref="#icon-vk"></use>
                 </svg>
               </a>
             </li>
             <li className="social__item">
-              <a className="link" href="#" aria-label="Переход на страницу pinterest">
+              <a className="link" href="https://ru.pinterest.com" aria-label="Переход на страницу pinterest">
                 <svg width="20" height="20" aria-hidden="true">
                   <use xlinkHref="#icon-pinterest"></use>
                 </svg>
               </a>
             </li>
             <li className="social__item">
-              <a className="link" href="#" aria-label="Переход на страницу reddit">
+              <a className="link" href="https://www.reddit.com" aria-label="Переход на страницу reddit">
                 <svg width="20" height="20" aria-hidden="true">
                   <use xlinkHref="#icon-reddit"></use>
                 </svg>
@@ -52,16 +53,28 @@ function Footer () {
                 </Link>
               </li>
               <li className="footer__item">
-                <a className="link" href="#">Гарантии
-                </a>
+                <Link
+                  className="link"
+                  to={AppRoute.Guarantee}
+                >
+                    Гарантии
+                </Link>
               </li>
               <li className="footer__item">
-                <a className="link" href="#">Доставка
-                </a>
+                <Link
+                  className="link"
+                  to={AppRoute.Delivery}
+                >
+                  Доставка
+                </Link>
               </li>
               <li className="footer__item">
-                <a className="link" href="#">О компании
-                </a>
+                <Link
+                  className="link"
+                  to={AppRoute.About}
+                >
+                  О компании
+                </Link>
               </li>
             </ul>
           </li>
@@ -69,16 +82,28 @@ function Footer () {
             <p className="footer__title">Ресурсы</p>
             <ul className="footer__list">
               <li className="footer__item">
-                <a className="link" href="#">Курсы операторов
-                </a>
+                <Link
+                  className="link"
+                  to={AppRoute.Courses}
+                >
+                  Курсы операторов
+                </Link>
               </li>
               <li className="footer__item">
-                <a className="link" href="#">Блог
-                </a>
+                <Link
+                  className="link"
+                  to={AppRoute.Blog}
+                >
+                  Блог
+                </Link>
               </li>
               <li className="footer__item">
-                <a className="link" href="#">Сообщество
-                </a>
+                <Link
+                  className="link"
+                  to={AppRoute.Community}
+                >
+                  Сообщество
+                </Link>
               </li>
             </ul>
           </li>
@@ -86,12 +111,20 @@ function Footer () {
             <p className="footer__title">Поддержка</p>
             <ul className="footer__list">
               <li className="footer__item">
-                <a className="link" href="#">FAQ
-                </a>
+                <Link
+                  className="link"
+                  to={AppRoute.Faq}
+                >
+                    FAQ
+                </Link>
               </li>
               <li className="footer__item">
-                <a className="link" href="#">Задать вопрос
-                </a>
+                <Link
+                  className="link"
+                  to={AppRoute.Ask}
+                >
+                    Задать вопрос
+                </Link>
               </li>
             </ul>
           </li>
