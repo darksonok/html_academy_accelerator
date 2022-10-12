@@ -12,7 +12,7 @@ function Banner () {
       ? <p> Данные загружаются </p>
       :
       <div className="banner">
-        <img src={promo.previewImg} srcSet={promo.previewImg2x} width="1280" height="280" alt="баннер" />
+        <img src={`/${promo.previewImg}`} srcSet={`/${promo.previewImg2x}`} width="1280" height="280" alt="баннер" />
         <p className="banner__info">
           <span className="banner__message">Новинка!</span>
           <span className="title title--h1">{promo.name}</span>

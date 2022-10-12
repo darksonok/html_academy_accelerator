@@ -14,6 +14,15 @@ export enum AppRoute {
   Item ='/item/:id',
   CatalogPage = '/catalog/:pageId',
   NotFound = '/not_found',
+  Guarantee = '/guarantee',
+  Delivery = '/delivery',
+  About = '/about',
+  Courses = '/courses',
+  Blog = '/blog',
+  Community = '/community',
+  Faq = '/faq',
+  Ask = '/ask',
+  Basket = '/basket',
 }
 
 const NUMBER_OF_CARDS_TO_PAGINATE = 9;

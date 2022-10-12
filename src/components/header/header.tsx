@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 function Header () {
   return (
@@ -23,11 +24,11 @@ function Header () {
                 Каталог
               </Link>
             </li>
-            <li className="main-nav__item"><a className="main-nav__link" href="#">Гарантии</a>
+            <li className="main-nav__item"><Link className="main-nav__link" to={AppRoute.Guarantee}>Гарантии</Link>
             </li>
-            <li className="main-nav__item"><a className="main-nav__link" href="#">Доставка</a>
+            <li className="main-nav__item"><Link className="main-nav__link" to={AppRoute.Delivery}>Доставка</Link>
             </li>
-            <li className="main-nav__item"><a className="main-nav__link" href="#">О компании</a>
+            <li className="main-nav__item"><Link className="main-nav__link" to={AppRoute.About}>О компании</Link>
             </li>
           </ul>
         </nav>
@@ -53,11 +54,11 @@ function Header () {
             </svg><span className="visually-hidden">Сбросить поиск</span>
           </button>
         </div>
-        <a className="header__basket-link" href="#">
+        <Link className="header__basket-link" to={AppRoute.Basket}>
           <svg width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg>
-        </a>
+        </Link>
       </div>
     </header>
   );
