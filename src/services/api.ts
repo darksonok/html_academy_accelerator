@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { APIRoute, ConnectionParams } from '../const';
 import { Camera } from '../types/Camera';
-import { Review } from '../types/Review';
+import { Review, ReviewPost } from '../types/Review';
 
 const options: AxiosRequestConfig = {
   baseURL: String(ConnectionParams.baseURL),
@@ -39,7 +39,7 @@ export const fetchSimilarItems = async (
     );
 };
 
-export const fetchIremReviews = async (
+export const fetchItemReviews = async (
   id: number,
   callbackForSetReviewLoadingStatus: React.Dispatch<React.SetStateAction<boolean>>,
   callbackForSetReviews: React.Dispatch<React.SetStateAction<Review[]>>,
@@ -48,6 +48,19 @@ export const fetchIremReviews = async (
     .then( ({data}) => {
       callbackForSetReviewLoadingStatus(false);
       callbackForSetReviews(data);
+    }
+    );
+};
+
+export const postReview = async (
+  review: ReviewPost,
+  callbackForSuccessMessage: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  await api.post<ReviewPost>(APIRoute.Reviews, review)
+    .then( () => {
+      // eslint-disable-next-line no-console
+      console.log('успех');
+      callbackForSuccessMessage(true);
     }
     );
 };

@@ -17,7 +17,7 @@ const humanizeDate = (date: string) => {
   dayjs.updateLocale('ru', {
     months: MonthsInParentCase
   });
-  const humanizedDate = dayjs(date).locale('ru').format('MM MMMM');
+  const humanizedDate = dayjs(date).locale('ru').format('DD MMMM');
   return humanizedDate;
 };
 
