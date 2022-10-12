@@ -5,6 +5,7 @@ import Catalog from '../../pages/catalog/catalog';
 import Item from '../../pages/item/item';
 import Main from '../../pages/main/main';
 import { getCamerasLoadingStatus } from '../../store/selectors';
+import NotFound from '../not-found/not-found';
 
 function App(): JSX.Element {
 
@@ -26,6 +27,14 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.Item}
             element={<Item />}
+          />
+          <Route
+            path={AppRoute.NotFound}
+            element={<NotFound />}
+          />
+          <Route
+            path='*'
+            element={<NotFound />}
           />
         </Routes>
       </BrowserRouter>

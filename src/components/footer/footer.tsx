@@ -46,7 +46,7 @@ function Footer () {
               <li className="footer__item">
                 <Link
                   className="link"
-                  to={'/1'}
+                  to={'/catalog/1'}
                 >
                   Каталог
                 </Link>
