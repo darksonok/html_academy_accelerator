@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Camera } from '../../types/Camera';
 
 type AddItemModalProps = {
@@ -6,10 +7,26 @@ type AddItemModalProps = {
 }
 
 function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
+
+  const onEscapeKeyClick = (evt: KeyboardEvent) => {
+    evt.key === 'Escape' && onCloseButtonClick(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener('keyup', onEscapeKeyClick);
+    return (() => {
+      document.removeEventListener('keyup', onEscapeKeyClick);
+    });
+  });
+
   return (
     <div className="modal is-active">
       <div className="modal__wrapper">
-        <div className="modal__overlay"></div>
+        <div
+          className="modal__overlay"
+          onClick={() => onCloseButtonClick(false)}
+        >
+        </div>
         <div className="modal__content">
           <p className="title title--h4">Добавить товар в корзину</p>
           <div className="basket-item basket-item--short">

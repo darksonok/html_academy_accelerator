@@ -26,43 +26,44 @@ function SimilarItems ({ onAddClick }: SimilarItemsProps) {
       ? <p> Похожие камеры грузятся</p>
       :
       <section className="product-similar">
-        <div className="container">
-          <h2 className="title title--h3">Похожие товары</h2>
-          <div className="product-similar__slider">
-            <div className="product-similar__slider-list">
-              {similarItems.map((similarItem, index) => (
-                <CameraCard
-                  key={`similar-${similarItem.id}`}
-                  cameraCard={similarItem}
-                  onAddClick={() => onAddClick(similarItem)}
-                  cardNumber={index}
-                  shownSimilarItems={shownSimilarItems}
-                />))}
+        { similarItems.length > 0 &&
+          <div className="container">
+            <h2 className="title title--h3">Похожие товары</h2>
+            <div className="product-similar__slider">
+              <div className="product-similar__slider-list">
+                {similarItems.map((similarItem, index) => (
+                  <CameraCard
+                    key={`similar-${similarItem.id}`}
+                    cameraCard={similarItem}
+                    onAddClick={() => onAddClick(similarItem)}
+                    cardNumber={index}
+                    shownSimilarItems={shownSimilarItems}
+                  />))}
+              </div>
+              <button
+                className="slider-controls slider-controls--prev"
+                type="button"
+                aria-label="Предыдущий слайд"
+                onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item - SIMILAR_ITEMS_SHOW_STEP))}
+                disabled={shownSimilarItems[0] === NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW}
+              >
+                <svg width="7" height="12" aria-hidden="true">
+                  <use xlinkHref="#icon-arrow"></use>
+                </svg>
+              </button>
+              <button
+                className="slider-controls slider-controls--next"
+                type="button"
+                aria-label="Следующий слайд"
+                onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item + SIMILAR_ITEMS_SHOW_STEP))}
+                disabled={shownSimilarItems[shownSimilarItems.length - 1] === similarItems.length - 1}
+              >
+                <svg width="7" height="12" aria-hidden="true">
+                  <use xlinkHref="#icon-arrow"></use>
+                </svg>
+              </button>
             </div>
-            <button
-              className="slider-controls slider-controls--prev"
-              type="button"
-              aria-label="Предыдущий слайд"
-              onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item - SIMILAR_ITEMS_SHOW_STEP))}
-              disabled={shownSimilarItems[0] === NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW}
-            >
-              <svg width="7" height="12" aria-hidden="true">
-                <use xlinkHref="#icon-arrow"></use>
-              </svg>
-            </button>
-            <button
-              className="slider-controls slider-controls--next"
-              type="button"
-              aria-label="Следующий слайд"
-              onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item + SIMILAR_ITEMS_SHOW_STEP))}
-              disabled={shownSimilarItems[shownSimilarItems.length - 1] === similarItems.length - 1}
-            >
-              <svg width="7" height="12" aria-hidden="true">
-                <use xlinkHref="#icon-arrow"></use>
-              </svg>
-            </button>
-          </div>
-        </div>
+          </div>}
       </section>
   );
 }

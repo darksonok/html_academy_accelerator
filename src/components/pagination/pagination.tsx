@@ -17,7 +17,7 @@ function Pagination () {
         <li className="pagination__item">
           <Link
             className="pagination__link pagination__link"
-            to={`/${Number(pageId) - 1}`}
+            to={`/catalog/${Number(pageId) - 1}`}
           >
             Назад
           </Link>
@@ -29,7 +29,7 @@ function Pagination () {
           >
             <Link
               className={`pagination__link pagination__link${page === Number(pageId) ? '--active' : ''}`}
-              to={`/${page}`}
+              to={`/catalog/${page}`}
             >
               {page}
             </Link>
@@ -40,7 +40,7 @@ function Pagination () {
         <li className="pagination__item">
           <Link
             className="pagination__link pagination__link"
-            to={`/${Number(pageId) + 1}`}
+            to={`/catalog/${Number(pageId) + 1}`}
           >
             Далее
           </Link>

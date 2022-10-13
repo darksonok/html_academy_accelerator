@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { HumanazeRatingMap, NORMILIZE_CONSTANT_FOR_REVIEW_FORM, NumberOfRatingStarsValue } from '../../../const';
 import { postReview } from '../../../services/api';
@@ -23,6 +23,17 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
   const [isAdvantageValid, setAdvantageValidationStatus] = useState(true);
   const [isDisadvantageValid, setDisadvantageValidationStatus] = useState(true);
   const [isReviewValid, setReviewValidationStatus] = useState(true);
+
+  const onEscapeKeyClick = (evt: KeyboardEvent) => {
+    evt.key === 'Escape' && onCloseButtonClick(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener('keyup', onEscapeKeyClick);
+    return (() => {
+      document.removeEventListener('keyup', onEscapeKeyClick);
+    });
+  });
 
   const validateForm = () => {
 
@@ -59,7 +70,12 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
       :
       <div className="modal is-active">
         <div className="modal__wrapper">
-          <div className="modal__overlay"></div>
+          <div
+            className="modal__overlay"
+            onClick={() => onCloseButtonClick(false)}
+          >
+
+          </div>
           <div className="modal__content">
             <p className="title title--h4">Оставить отзыв</p>
             <div className="form-review">

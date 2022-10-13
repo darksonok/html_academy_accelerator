@@ -1,13 +1,31 @@
+import { useEffect } from 'react';
+
 type ReviewFormSuccessProps = {
   onCloseButtonClick: React.Dispatch<React.SetStateAction<boolean>>;
   forceUpdateFunction: () => Promise<void>;
 }
 
 function ReviewFormSuccess ({ onCloseButtonClick, forceUpdateFunction }: ReviewFormSuccessProps) {
+
+  const onEscapeKeyClick = (evt: KeyboardEvent) => {
+    evt.key === 'Escape' && onCloseButtonClick(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener('keyup', onEscapeKeyClick);
+    return (() => {
+      document.removeEventListener('keyup', onEscapeKeyClick);
+    });
+  });
+
   return (
     <div className="modal is-active modal--narrow">
       <div className="modal__wrapper">
-        <div className="modal__overlay"></div>
+        <div
+          className="modal__overlay"
+          onClick={() => onCloseButtonClick(false)}
+        >
+        </div>
         <div className="modal__content">
           <p className="title title--h4">Спасибо за отзыв</p>
           <svg className="modal__icon" width="80" height="78" aria-hidden="true">
