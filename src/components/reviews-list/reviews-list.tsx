@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { INITIAL_SHOWN_REVIEWS, REVIEW_TO_SHOW_STEP } from '../../const';
+import { ReviewToShowParams } from '../../const';
 import { fetchItemReviews } from '../../services/api';
 import { Review } from '../../types/Review';
 import ReviewForm from './review-form/review-form';
@@ -12,12 +12,12 @@ function ReviewsList () {
   const { id } = useParams();
   const [reviews, setReviews] = useState([] as Review[]);
   const [isReviewsLoading, setReviewsLoadingStatus] = useState(true);
-  const [shownReviews, setShownReview] = useState(INITIAL_SHOWN_REVIEWS);
+  const [shownReviews, setShownReview] = useState(ReviewToShowParams.InitialShownReviews);
   const [isReviewModalOpen, setReviewModalOpenStatus] = useState(false);
   const forceUpdate = () => fetchItemReviews(Number(id), setReviewsLoadingStatus, setReviews);
   useEffect(() => {
     fetchItemReviews(Number(id), setReviewsLoadingStatus, setReviews);
-    return (() => setShownReview(INITIAL_SHOWN_REVIEWS));
+    return (() => setShownReview(ReviewToShowParams.InitialShownReviews));
   }, [id]);
 
   return (
@@ -48,7 +48,7 @@ function ReviewsList () {
               <button
                 className="btn btn--purple"
                 type="button"
-                onClick={() => setShownReview(shownReviews + REVIEW_TO_SHOW_STEP)}
+                onClick={() => setShownReview(shownReviews + ReviewToShowParams.ReviewToShowStep)}
               >
                 Показать больше отзывов
               </button>}

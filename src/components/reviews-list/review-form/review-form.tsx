@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { HumanazeRatingMap, NORMILIZE_CONSTANT_FOR_REVIEW_FORM, NumberOfRatingStarsValue } from '../../../const';
+import { HumanazeRatingsMap, ReviewToShowParams, numberOfRatingStarsValue } from '../../../const';
 import { postReview } from '../../../services/api';
 import { ReviewPost } from '../../../types/Review';
 import ReviewFormSuccess from './review-form-success/review-form-success';
@@ -89,20 +89,20 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
                     </legend>
                     <div className="rate__bar">
                       <div className="rate__group">
-                        {NumberOfRatingStarsValue.map((ratingStar) => (
+                        {numberOfRatingStarsValue.map((ratingStar) => (
                           <>
                             <input
                               className="visually-hidden"
                               id={`star=${ratingStar}`}
                               name="rating"
                               type="radio"
-                              value={NORMILIZE_CONSTANT_FOR_REVIEW_FORM - ratingStar}
+                              value={ReviewToShowParams.NormilizeConstantForReviewForm - ratingStar}
                               onChange={onChange}
                             />
                             <label
                               className="rate__label"
                               htmlFor={`star=${ratingStar}`}
-                              title={(HumanazeRatingMap.filter((ratingValue) => ratingValue.rating === ratingStar))[0].name}
+                              title={(HumanazeRatingsMap.filter((ratingValue) => ratingValue.rating === ratingStar))[0].name}
                             >
                             </label>
                           </>

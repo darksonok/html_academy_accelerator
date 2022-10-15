@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { InitialSimilarItemToShow, NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW, SIMILAR_ITEMS_SHOW_STEP } from '../../const';
+import { SimilarItemsParams } from '../../const';
 import { fetchSimilarItems } from '../../services/api';
 import { Camera } from '../../types/Camera';
 import CameraCard from '../camera-card/camera-card';
@@ -14,11 +14,11 @@ function SimilarItems ({ onAddClick }: SimilarItemsProps) {
   const { id } = useParams();
   const [isSimilarItemsLoading, setSimilarItemsLoadingStatus] = useState(true);
   const [similarItems, setSimilarItems] = useState([] as Camera[]);
-  const [shownSimilarItems, setShownSimilarItems] = useState(InitialSimilarItemToShow);
+  const [shownSimilarItems, setShownSimilarItems] = useState(SimilarItemsParams.InitialSimilarItemsToShow);
 
   useEffect(() => {
     fetchSimilarItems(Number(id), setSimilarItemsLoadingStatus, setSimilarItems);
-    return (() => setShownSimilarItems(InitialSimilarItemToShow));
+    return (() => setShownSimilarItems(SimilarItemsParams.InitialSimilarItemsToShow));
   }, [id]);
 
   return (
@@ -44,8 +44,8 @@ function SimilarItems ({ onAddClick }: SimilarItemsProps) {
                 className="slider-controls slider-controls--prev"
                 type="button"
                 aria-label="Предыдущий слайд"
-                onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item - SIMILAR_ITEMS_SHOW_STEP))}
-                disabled={shownSimilarItems[0] === NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW}
+                onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item - SimilarItemsParams.SimilarItemToShowStep))}
+                disabled={shownSimilarItems[0] === SimilarItemsParams.NumberOfFirstInitialSimilarItemToShow}
               >
                 <svg width="7" height="12" aria-hidden="true">
                   <use xlinkHref="#icon-arrow"></use>
@@ -55,7 +55,7 @@ function SimilarItems ({ onAddClick }: SimilarItemsProps) {
                 className="slider-controls slider-controls--next"
                 type="button"
                 aria-label="Следующий слайд"
-                onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item + SIMILAR_ITEMS_SHOW_STEP))}
+                onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item + SimilarItemsParams.SimilarItemToShowStep))}
                 disabled={shownSimilarItems[shownSimilarItems.length - 1] === similarItems.length - 1}
               >
                 <svg width="7" height="12" aria-hidden="true">

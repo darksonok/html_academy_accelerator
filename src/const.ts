@@ -1,6 +1,6 @@
 export const ConnectionParams = {
-  baseURL: 'https://camera-shop.accelerator.pages.academy',
-  timeout: 5000,
+  BaseURL: 'https://camera-shop.accelerator.pages.academy',
+  Timeout: 5000,
 };
 
 export const APIRoute = {
@@ -27,7 +27,7 @@ export enum AppRoute {
 
 const NUMBER_OF_CARDS_TO_PAGINATE = 9;
 
-const NumberOfRatingStarsValue = [1,2,3,4,5];
+const numberOfRatingStarsValue = [1,2,3,4,5];
 
 const BreadcrumbsPaths = {
   catalog: {
@@ -41,17 +41,25 @@ const TabsValues = {
   Characteristics: 'Характеристики'
 };
 
-const SIMILAR_ITEMS_SHOW_STEP = 1;
-const InitialSimilarItemToShow = [0,1,2];
-const NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW = 0;
+const SimilarItemsParams = {
+  SimilarItemToShowStep: 1,
+  InitialSimilarItemsToShow: [0,1,2],
+  NumberOfFirstInitialSimilarItemToShow: 0,
+};
+
 const MonthsInParentCase = [
   'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля',
   'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
 ];
-const INITIAL_SHOWN_REVIEWS = 3;
-const REVIEW_TO_SHOW_STEP = 3;
 
-const HumanazeRatingMap = [
+const ReviewToShowParams = {
+  InitialShownReviews: 3,
+  ReviewToShowStep: 3,
+  NormilizeConstantForReviewForm: 6
+};
+
+
+const HumanazeRatingsMap = [
   {
     rating: 1,
     name: 'Ужасно'
@@ -74,25 +82,19 @@ const HumanazeRatingMap = [
   },
 ];
 
-const NORMILIZE_CONSTANT_FOR_REVIEW_FORM = 6;
-
 const StatusCodes = {
   NOT_FOUND: 404
 };
 
 export {
   NUMBER_OF_CARDS_TO_PAGINATE,
-  NumberOfRatingStarsValue,
+  numberOfRatingStarsValue,
   BreadcrumbsPaths,
   TabsValues,
-  SIMILAR_ITEMS_SHOW_STEP,
-  InitialSimilarItemToShow,
-  NUMBER_OF_FIRST_INITIAL_SIMILAR_ITEM_TO_SHOW,
   MonthsInParentCase,
-  INITIAL_SHOWN_REVIEWS,
-  REVIEW_TO_SHOW_STEP,
-  HumanazeRatingMap,
-  NORMILIZE_CONSTANT_FOR_REVIEW_FORM,
-  StatusCodes
+  HumanazeRatingsMap,
+  StatusCodes,
+  SimilarItemsParams,
+  ReviewToShowParams
 };
 

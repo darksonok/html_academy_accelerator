@@ -3,7 +3,7 @@ import { Camera } from '../types/Camera';
 import { Promo } from '../types/Promo';
 import { datatype, lorem, name, random, system } from 'faker';
 import { Review } from '../types/Review';
-import { NumberOfRatingStarsValue } from '../const';
+import { numberOfRatingStarsValue } from '../const';
 
 export const makeFakeCameraCard = (): Camera => ({
   id: Number(nanoid()),
@@ -13,7 +13,7 @@ export const makeFakeCameraCard = (): Camera => ({
   category: random.word(),
   description: lorem.paragraph(),
   level: random.word(),
-  rating: Number(datatype.number(NumberOfRatingStarsValue.length)),
+  rating: Number(datatype.number(numberOfRatingStarsValue.length)),
   price: Number(datatype.number()),
   previewImg: system.filePath(),
   previewImg2x: system.filePath(),
@@ -45,7 +45,7 @@ export const makeFakeReview = (): Review => ({
   advantage: lorem.paragraph(),
   disadvantage: lorem.paragraph(),
   review: lorem.paragraphs(),
-  rating: Number(datatype.number(NumberOfRatingStarsValue.length)),
+  rating: Number(datatype.number(numberOfRatingStarsValue.length)),
   createAt: String(new Date()),
   cameraId: Number(nanoid()),
 });

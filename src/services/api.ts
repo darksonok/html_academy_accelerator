@@ -6,8 +6,8 @@ import { HttpErrors } from '../types/HttpErrors';
 import { Review, ReviewPost } from '../types/Review';
 
 const options: AxiosRequestConfig = {
-  baseURL: String(ConnectionParams.baseURL),
-  timeout: Number(ConnectionParams.timeout),
+  baseURL: String(ConnectionParams.BaseURL),
+  timeout: Number(ConnectionParams.Timeout),
 };
 
 export const createAPI = (): AxiosInstance => axios.create(options);
