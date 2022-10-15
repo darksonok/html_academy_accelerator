@@ -1,5 +1,5 @@
 export type Promo = {
-  id: 1;
+  id: number;
   name: string;
   previewImg: string;
   previewImg2x: string;

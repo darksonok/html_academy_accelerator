@@ -10,7 +10,7 @@ const options: AxiosRequestConfig = {
   timeout: Number(ConnectionParams.timeout),
 };
 
-const createAPI = (): AxiosInstance => axios.create(options);
+export const createAPI = (): AxiosInstance => axios.create(options);
 const api = createAPI();
 
 export default api;

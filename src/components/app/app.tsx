@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import Catalog from '../../pages/catalog/catalog';
@@ -14,30 +14,30 @@ function App(): JSX.Element {
   return isLoading
     ? <p> Подождите, данные загружаются</p>
     : (
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<Main />}
-          />
-          <Route
-            path={AppRoute.CatalogPage}
-            element={<Catalog />}
-          />
-          <Route
-            path={AppRoute.Item}
-            element={<Item />}
-          />
-          <Route
-            path={AppRoute.NotFound}
-            element={<NotFound />}
-          />
-          <Route
-            path='*'
-            element={<NotFound />}
-          />
-        </Routes>
-      </BrowserRouter>
+
+      <Routes>
+        <Route
+          path={AppRoute.Main}
+          element={<Main />}
+        />
+        <Route
+          path={AppRoute.CatalogPage}
+          element={<Catalog />}
+        />
+        <Route
+          path={AppRoute.Item}
+          element={<Item />}
+        />
+        <Route
+          path={AppRoute.NotFound}
+          element={<NotFound />}
+        />
+        <Route
+          path='*'
+          element={<NotFound />}
+        />
+      </Routes>
+
     );
 }
 

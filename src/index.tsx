@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
+import HistoryRouter from './components/history-route/history-route';
+import browserHistory from './services/browser-history';
 import { store } from './store';
 import { fetchCamerasAction, fetchPromoAction } from './store/api-actions';
 
@@ -15,7 +17,9 @@ store.dispatch(fetchPromoAction());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HistoryRouter history={browserHistory}>
+        <App />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>,
 );
