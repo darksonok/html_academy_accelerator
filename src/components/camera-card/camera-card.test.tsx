@@ -12,7 +12,7 @@ describe('Camera Card component', () => {
 
     render(
       <BrowserRouter>
-        <CameraCard cameraCard={mockCameraCard} onAddClick={null as unknown as (cameraCard: Camera) => void}/>
+        <CameraCard cameraCard={mockCameraCard} onAddToBusketClick={null as unknown as (cameraCard: Camera) => void}/>
       </BrowserRouter>
     );
 

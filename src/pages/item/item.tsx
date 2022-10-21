@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import AddItemModal from '../../components/add-item-modal/add-item-modal';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Footer from '../../components/footer/footer';
@@ -9,26 +10,35 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import SimilarItems from '../../components/similar-items/similar-items';
 import Tabs from '../../components/tabs/tabs';
 import { BreadcrumbsPaths } from '../../const';
-import { fetchChosenItem } from '../../services/api';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { store } from '../../store';
+import { changeOpenedCameraCardLoadingStatus, loadOpenedCameraCard } from '../../store/actions';
+import { fetchOpenedCameraCardAction } from '../../store/api-actions';
+import { getOpenedCameraCard, getOpenedCameraCardLoadingStatus } from '../../store/selectors';
 import { Camera } from '../../types/Camera';
 
 function Item () {
 
   const { id } = useParams();
-  const [isItemLoading, setItemLoadingStatus] = useState(true);
-  const [item, setItem] = useState({} as Camera);
   const [isAddItemModalOpened, setAddItemModalOpenStatus] = useState(false);
   const [chosenCameraCard, setChosenCameraCard] = useState({} as Camera);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onAddClick = (cameraCard: Camera) => {
+  const handleAddToBusketClick = (cameraCard: Camera) => {
     setAddItemModalOpenStatus(true);
     setChosenCameraCard(cameraCard);
   };
 
+  const item: Camera = useAppSelector(getOpenedCameraCard);
+  const isItemLoading = useAppSelector(getOpenedCameraCardLoadingStatus);
+
   useEffect(() => {
-    fetchChosenItem(Number(id), setItemLoadingStatus, setItem, navigate);
-  }, [id, navigate]);
+    store.dispatch(fetchOpenedCameraCardAction(Number(id)));
+    return (() => {
+      dispatch(changeOpenedCameraCardLoadingStatus(true));
+      dispatch(loadOpenedCameraCard({} as Camera));
+    });
+  }, [dispatch, id]);
 
   return (
     isItemLoading
@@ -56,7 +66,7 @@ function Item () {
                     <button
                       className="btn btn--purple"
                       type="button"
-                      onClick={() => onAddClick(item)}
+                      onClick={() => handleAddToBusketClick(item)}
                     >
                       <svg width="24" height="16" aria-hidden="true">
                         <use xlinkHref="#icon-add-basket"></use>
@@ -69,7 +79,7 @@ function Item () {
             </div>
             <div className="page-content__section">
               <SimilarItems
-                onAddClick={onAddClick}
+                onAddToBusketClick={handleAddToBusketClick}
               />
             </div>
             <div className="page-content__section">

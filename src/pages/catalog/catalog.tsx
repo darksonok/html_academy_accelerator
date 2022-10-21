@@ -10,7 +10,7 @@ import Header from '../../components/header/header';
 import Pagination from '../../components/pagination/pagination';
 import Sorter from '../../components/sorter/sorter';
 import { BreadcrumbsPaths, NUMBER_OF_CARDS_TO_PAGINATE } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getCameras } from '../../store/selectors';
 import { Camera } from '../../types/Camera';
 
@@ -23,7 +23,7 @@ function Catalog () {
   const [isAddItemModalOpened, setAddItemModalOpenStatus] = useState(false);
   const [chosenCameraCard, setChosenCameraCard] = useState({} as Camera);
 
-  const onAddClick = (cameraCard: Camera) => {
+  const handleAddToBusketClick = (cameraCard: Camera) => {
     setAddItemModalOpenStatus(true);
     setChosenCameraCard(cameraCard);
   };
@@ -47,7 +47,7 @@ function Catalog () {
                       <CameraCard
                         key={`${cameraCard.id}-cameraCard`}
                         cameraCard={cameraCard}
-                        onAddClick={onAddClick}
+                        onAddToBusketClick={handleAddToBusketClick}
                       />
                     ))}
                   </div>

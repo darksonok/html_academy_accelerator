@@ -1,20 +1,23 @@
 import { useEffect } from 'react';
 
 type ReviewFormSuccessProps = {
-  onCloseButtonClick: React.Dispatch<React.SetStateAction<boolean>>;
-  forceUpdateFunction: () => Promise<void>;
+  onCloseButtonClick: (modalStatus: boolean) => void;
 }
 
-function ReviewFormSuccess ({ onCloseButtonClick, forceUpdateFunction }: ReviewFormSuccessProps) {
+function ReviewFormSuccess ({ onCloseButtonClick }: ReviewFormSuccessProps) {
 
-  const onEscapeKeyClick = (evt: KeyboardEvent) => {
-    evt.key === 'Escape' && onCloseButtonClick(false);
+  const handleCloseButtonClick = (modalStatus: boolean) => {
+    onCloseButtonClick(modalStatus);
+  };
+
+  const handleEscapeKeyClick = (evt: KeyboardEvent) => {
+    evt.key === 'Escape' && handleCloseButtonClick(false);
   };
 
   useEffect(() => {
-    document.addEventListener('keyup', onEscapeKeyClick);
+    document.addEventListener('keyup', handleEscapeKeyClick);
     return (() => {
-      document.removeEventListener('keyup', onEscapeKeyClick);
+      document.removeEventListener('keyup', handleEscapeKeyClick);
     });
   });
 
@@ -23,7 +26,7 @@ function ReviewFormSuccess ({ onCloseButtonClick, forceUpdateFunction }: ReviewF
       <div className="modal__wrapper">
         <div
           className="modal__overlay"
-          onClick={() => onCloseButtonClick(false)}
+          onClick={() => handleCloseButtonClick(false)}
         >
         </div>
         <div className="modal__content">
@@ -36,8 +39,7 @@ function ReviewFormSuccess ({ onCloseButtonClick, forceUpdateFunction }: ReviewF
               className="btn btn--purple modal__btn modal__btn--fit-width"
               type="button"
               onClick={() => {
-                onCloseButtonClick(false);
-                forceUpdateFunction();
+                handleCloseButtonClick(false);
               }}
             >
               Вернуться к покупкам
@@ -48,8 +50,7 @@ function ReviewFormSuccess ({ onCloseButtonClick, forceUpdateFunction }: ReviewF
             type="button"
             aria-label="Закрыть попап"
             onClick={() => {
-              onCloseButtonClick(false);
-              forceUpdateFunction();
+              handleCloseButtonClick(false);
             }}
           >
             <svg width="10" height="10" aria-hidden="true">

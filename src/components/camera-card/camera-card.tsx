@@ -4,12 +4,17 @@ import Rating from '../rating/rating';
 
 type CameraCardProps = {
   cameraCard: Camera;
-  onAddClick: (cameraCard: Camera) => void;
+  onAddToBusketClick: (cameraCard: Camera) => void;
   shownSimilarItems?: number[];
   cardNumber?: number;
 }
 
-function CameraCard ({cameraCard, onAddClick, shownSimilarItems, cardNumber}: CameraCardProps) {
+function CameraCard ({cameraCard, onAddToBusketClick, shownSimilarItems, cardNumber}: CameraCardProps) {
+
+  const handleAddToBusketClick = (camera: Camera) => {
+    onAddToBusketClick(camera);
+  };
+
   return (
     <div
       className={shownSimilarItems?.filter((similarItem) => similarItem === cardNumber).length !== 0 ? 'product-card is-active' : 'product-card'}
@@ -37,7 +42,7 @@ function CameraCard ({cameraCard, onAddClick, shownSimilarItems, cardNumber}: Ca
         <button
           className="btn btn--purple product-card__btn"
           type="button"
-          onClick={() => onAddClick(cameraCard)}
+          onClick={() => handleAddToBusketClick(cameraCard)}
         >
           Купить
         </button>

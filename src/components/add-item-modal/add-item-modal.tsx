@@ -8,14 +8,19 @@ type AddItemModalProps = {
 
 function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
 
-  const onEscapeKeyClick = (evt: KeyboardEvent) => {
-    evt.key === 'Escape' && onCloseButtonClick(false);
+  const handleCloseButtonClick = (modalStatus: boolean) => {
+    onCloseButtonClick(modalStatus);
+  };
+
+
+  const handleEscapeKeyClick = (evt: KeyboardEvent) => {
+    evt.key === 'Escape' && handleCloseButtonClick(false);
   };
 
   useEffect(() => {
-    document.addEventListener('keyup', onEscapeKeyClick);
+    document.addEventListener('keyup', handleEscapeKeyClick);
     return (() => {
-      document.removeEventListener('keyup', onEscapeKeyClick);
+      document.removeEventListener('keyup', handleEscapeKeyClick);
     });
   });
 
@@ -24,7 +29,7 @@ function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
       <div className="modal__wrapper">
         <div
           className="modal__overlay"
-          onClick={() => onCloseButtonClick(false)}
+          onClick={() => handleCloseButtonClick(false)}
         >
         </div>
         <div className="modal__content">
@@ -62,7 +67,7 @@ function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
             className="cross-btn"
             type="button"
             aria-label="Закрыть попап"
-            onClick={() => onCloseButtonClick(false)}
+            onClick={() => handleCloseButtonClick(false)}
           >
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
