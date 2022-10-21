@@ -1,24 +1,31 @@
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ReviewToShowParams } from '../../const';
-import { fetchItemReviews } from '../../services/api';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { store } from '../../store';
+import { changeReviewsLoadingStatus, loadReviews } from '../../store/actions';
+import { fetchReviewsAction } from '../../store/api-actions';
+import { getReviews, getReviewsLoadingStatus } from '../../store/selectors';
 import { Review } from '../../types/Review';
 import ReviewForm from './review-form/review-form';
 import ReviewElement from './review/review';
 
 function ReviewsList () {
-
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const [reviews, setReviews] = useState([] as Review[]);
-  const [isReviewsLoading, setReviewsLoadingStatus] = useState(true);
   const [shownReviews, setShownReview] = useState(ReviewToShowParams.InitialShownReviews);
   const [isReviewModalOpen, setReviewModalOpenStatus] = useState(false);
-  const forceUpdate = () => fetchItemReviews(Number(id), setReviewsLoadingStatus, setReviews);
+  const reviews: Review[] = useAppSelector(getReviews);
+  const isReviewsLoading = useAppSelector(getReviewsLoadingStatus);
   useEffect(() => {
-    fetchItemReviews(Number(id), setReviewsLoadingStatus, setReviews);
-    return (() => setShownReview(ReviewToShowParams.InitialShownReviews));
-  }, [id]);
+    store.dispatch(fetchReviewsAction(Number(id)));
+    return (() => {
+      dispatch(changeReviewsLoadingStatus(true));
+      dispatch(loadReviews([] as Review[]));
+    });
+  }, [dispatch, id]);
 
   return (
     isReviewsLoading
@@ -38,9 +45,12 @@ function ReviewsList () {
               </button>
             </div>
             <ul className="review-block__list">
-              {reviews.sort((a, b) => dayjs(b.createAt).diff(dayjs(a.createAt))).slice(0, shownReviews).map((review) => (
-                <ReviewElement key={`review-${review.id}`} review={review} />
-              ))}
+              {reviews.slice()
+                .sort((a, b) => dayjs(b.createAt).diff(dayjs(a.createAt)))
+                .slice(0, shownReviews)
+                .map((review) => (
+                  <ReviewElement key={`review-${review.id}`} review={review} />
+                ))}
             </ul>
             <div className="review-block__buttons">
               {shownReviews < reviews.length
@@ -55,7 +65,7 @@ function ReviewsList () {
             </div>
           </div>
         </section>
-        {isReviewModalOpen && <ReviewForm onCloseButtonClick={setReviewModalOpenStatus} forceUpdateFunction={forceUpdate}/>}
+        {isReviewModalOpen && <ReviewForm onCloseButtonClick={setReviewModalOpenStatus} />}
       </>
   );
 }

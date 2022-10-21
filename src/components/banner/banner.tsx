@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getPromo, getPromoLoadingStatus } from '../../store/selectors';
 
 function Banner () {

@@ -1,19 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { HumanazeRatingsMap, ReviewToShowParams, numberOfRatingStarsValue } from '../../../const';
-import { postReview } from '../../../services/api';
+import { useAppDispatch } from '../../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../../hooks/use-app-selector';
+import { store } from '../../../store';
+import { changeSuccesfullReviewPostStatus } from '../../../store/actions';
+import { fetchReviewsAction, postReviewAction } from '../../../store/api-actions';
+import { getReviewSubmitStatus } from '../../../store/selectors';
 import { ReviewPost } from '../../../types/Review';
 import ReviewFormSuccess from './review-form-success/review-form-success';
 
 type ReviewFormProps = {
   onCloseButtonClick: React.Dispatch<React.SetStateAction<boolean>>;
-  forceUpdateFunction: () => Promise<void>;
 }
 
-function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormProps) {
-
+function ReviewForm ( { onCloseButtonClick }: ReviewFormProps) {
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const [isSubmitSuccesed, setSubmitSuccessStatus] = useState(false);
+
+  const handleCloseButtonClick = (modalStatus: boolean) => {
+    onCloseButtonClick(modalStatus);
+    store.dispatch(fetchReviewsAction(Number(id)));
+    dispatch(changeSuccesfullReviewPostStatus(false));
+  };
+
+  const isSubmitSuccesed = useAppSelector(getReviewSubmitStatus);
   const [formData, setFormData] = useState({
     cameraId: Number(id),
     rating: 0,
@@ -24,14 +35,14 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
   const [isDisadvantageValid, setDisadvantageValidationStatus] = useState(true);
   const [isReviewValid, setReviewValidationStatus] = useState(true);
 
-  const onEscapeKeyClick = (evt: KeyboardEvent) => {
-    evt.key === 'Escape' && onCloseButtonClick(false);
+  const handleEscapeKeyClick = (evt: KeyboardEvent) => {
+    evt.key === 'Escape' && handleCloseButtonClick(false);
   };
 
   useEffect(() => {
-    document.addEventListener('keyup', onEscapeKeyClick);
+    document.addEventListener('keyup', handleEscapeKeyClick);
     return (() => {
-      document.removeEventListener('keyup', onEscapeKeyClick);
+      document.removeEventListener('keyup', handleEscapeKeyClick);
     });
   });
 
@@ -51,35 +62,35 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
     );
   };
 
-  const onChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChangeEvent = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
     name === Object.keys(formData)[1]
       ? setFormData({...formData, [name]: Number(value)})
       : setFormData({...formData, [name]: value});
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     validateForm()
-    && postReview(formData, setSubmitSuccessStatus);
+    && dispatch(postReviewAction(formData));
   };
 
   return (
     isSubmitSuccesed
-      ? <ReviewFormSuccess onCloseButtonClick={onCloseButtonClick} forceUpdateFunction={forceUpdateFunction}/>
+      ? <ReviewFormSuccess onCloseButtonClick={handleCloseButtonClick} />
       :
       <div className="modal is-active">
         <div className="modal__wrapper">
           <div
             className="modal__overlay"
-            onClick={() => onCloseButtonClick(false)}
+            onClick={() => handleCloseButtonClick(false)}
           >
 
           </div>
           <div className="modal__content">
             <p className="title title--h4">Оставить отзыв</p>
             <div className="form-review">
-              <form method="post" onSubmit={onSubmit}>
+              <form method="post" onSubmit={handleFormSubmit}>
                 <div className="form-review__rate">
                   <fieldset className={`rate form-review__item ${!isRatingValid ? 'is-invalid' : ''}`} >
                     <legend className="rate__caption">Рейтинг
@@ -97,7 +108,7 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
                               name="rating"
                               type="radio"
                               value={ReviewToShowParams.NormilizeConstantForReviewForm - ratingStar}
-                              onChange={onChange}
+                              onChange={handleChangeEvent}
                             />
                             <label
                               className="rate__label"
@@ -125,7 +136,7 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
                         name="userName"
                         placeholder="Введите ваше имя"
                         required
-                        onChange={onChange}
+                        onChange={handleChangeEvent}
                       />
                     </label>
                     <p className="custom-input__error">Нужно указать имя</p>
@@ -142,7 +153,7 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
                         name="advantage"
                         placeholder="Основные преимущества товара"
                         required
-                        onChange={onChange}
+                        onChange={handleChangeEvent}
                       />
                     </label>
                     <p className="custom-input__error">Нужно указать достоинства</p>
@@ -159,7 +170,7 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
                         name="disadvantage"
                         placeholder="Главные недостатки товара"
                         required
-                        onChange={onChange}
+                        onChange={handleChangeEvent}
                       />
                     </label>
                     <p className="custom-input__error">Нужно указать недостатки</p>
@@ -175,7 +186,7 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
                         name="review"
                         minLength={5}
                         placeholder="Поделитесь своим опытом покупки"
-                        onChange={onChange}
+                        onChange={handleChangeEvent}
                       >
                       </textarea>
                     </label>
@@ -189,7 +200,7 @@ function ReviewForm ( { onCloseButtonClick, forceUpdateFunction }: ReviewFormPro
               className="cross-btn"
               type="button"
               aria-label="Закрыть попап"
-              onClick={() => onCloseButtonClick(false)}
+              onClick={() => handleCloseButtonClick(false)}
             >
               <svg width="10" height="10" aria-hidden="true">
                 <use xlinkHref="#icon-close"></use>

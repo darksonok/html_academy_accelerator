@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import Catalog from '../../pages/catalog/catalog';
 import Item from '../../pages/item/item';
 import Main from '../../pages/main/main';

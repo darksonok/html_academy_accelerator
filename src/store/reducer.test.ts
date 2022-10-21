@@ -1,4 +1,6 @@
+import { Camera } from '../types/Camera';
 import { Promo } from '../types/Promo';
+import { Review } from '../types/Review';
 import { makeFakeCameraCards, makeFakePromo } from '../utils/mock';
 import { changeCameraLoadingStatus, changePromoLoadingStatus, loadCameras, loadPromo } from './actions';
 import reducer from './reducer';
@@ -10,6 +12,13 @@ const state = {
   cameras: [],
   promo: {} as Promo,
   isPromoLoading: true,
+  openedCameraCard: {} as Camera,
+  isCameraCardLoading: true,
+  similarCameraCards: [] as Camera [],
+  isSimilarCameraCardsLoading: true,
+  reviews: [] as Review[],
+  isReviewsLoading: true,
+  isReviewSuccesfullyPosted:false,
 };
 
 

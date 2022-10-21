@@ -1,25 +1,39 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { SimilarItemsParams } from '../../const';
-import { fetchSimilarItems } from '../../services/api';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { store } from '../../store';
+import { changeSimilarCameraCardsLoadingStatus, loadSimilarCameraCards } from '../../store/actions';
+import { fetchSimilarCameraCardsAction } from '../../store/api-actions';
+import { getSimilarCameraCards, getSimilarCameraCardsLoadingStatus } from '../../store/selectors';
 import { Camera } from '../../types/Camera';
 import CameraCard from '../camera-card/camera-card';
 
 type SimilarItemsProps = {
-  onAddClick: (cameraCard: Camera) => void;
+  onAddToBusketClick: (cameraCard: Camera) => void;
 }
 
-function SimilarItems ({ onAddClick }: SimilarItemsProps) {
+function SimilarItems ({ onAddToBusketClick }: SimilarItemsProps) {
 
+  const handleAddToBusketClick = (camera: Camera) => {
+    onAddToBusketClick(camera);
+  };
+
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const [isSimilarItemsLoading, setSimilarItemsLoadingStatus] = useState(true);
-  const [similarItems, setSimilarItems] = useState([] as Camera[]);
   const [shownSimilarItems, setShownSimilarItems] = useState(SimilarItemsParams.InitialSimilarItemsToShow);
 
+  const isSimilarItemsLoading = useAppSelector(getSimilarCameraCardsLoadingStatus);
+  const similarItems = useAppSelector(getSimilarCameraCards);
+
   useEffect(() => {
-    fetchSimilarItems(Number(id), setSimilarItemsLoadingStatus, setSimilarItems);
-    return (() => setShownSimilarItems(SimilarItemsParams.InitialSimilarItemsToShow));
-  }, [id]);
+    store.dispatch(fetchSimilarCameraCardsAction(Number(id)));
+    return (() => {
+      dispatch(changeSimilarCameraCardsLoadingStatus(true));
+      dispatch(loadSimilarCameraCards([] as Camera[]));
+    });
+  }, [dispatch, id]);
 
   return (
     isSimilarItemsLoading
@@ -35,7 +49,7 @@ function SimilarItems ({ onAddClick }: SimilarItemsProps) {
                   <CameraCard
                     key={`similar-${similarItem.id}`}
                     cameraCard={similarItem}
-                    onAddClick={() => onAddClick(similarItem)}
+                    onAddToBusketClick={() => handleAddToBusketClick(similarItem)}
                     cardNumber={index}
                     shownSimilarItems={shownSimilarItems}
                   />))}

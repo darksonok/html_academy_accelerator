@@ -1,7 +1,8 @@
-import { useAppSelector } from '../../hooks';
+
 import { getCameras } from '../../store/selectors';
 import { getPaginationPages } from '../../utils';
 import { Link, useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 function Pagination () {
 
