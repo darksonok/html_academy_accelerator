@@ -19,6 +19,16 @@ function ReviewsList () {
   const [isReviewModalOpen, setReviewModalOpenStatus] = useState(false);
   const reviews: Review[] = useAppSelector(getReviews);
   const isReviewsLoading = useAppSelector(getReviewsLoadingStatus);
+  const handleReviewButtonClick = () => {
+    setReviewModalOpenStatus(true);
+  };
+  const handleMoreReviewButtonClick = () => {
+    setShownReview(shownReviews + ReviewToShowParams.ReviewToShowStep);
+  };
+  const handleReviewCloseButtonClick = (modalStatus: boolean) => {
+    setReviewModalOpenStatus(modalStatus);
+  };
+
   useEffect(() => {
     store.dispatch(fetchReviewsAction(Number(id)));
     return (() => {
@@ -39,7 +49,7 @@ function ReviewsList () {
               <button
                 className="btn"
                 type="button"
-                onClick={() => setReviewModalOpenStatus(true)}
+                onClick={handleReviewButtonClick}
               >
                 Оставить свой отзыв
               </button>
@@ -58,14 +68,14 @@ function ReviewsList () {
               <button
                 className="btn btn--purple"
                 type="button"
-                onClick={() => setShownReview(shownReviews + ReviewToShowParams.ReviewToShowStep)}
+                onClick={handleMoreReviewButtonClick}
               >
                 Показать больше отзывов
               </button>}
             </div>
           </div>
         </section>
-        {isReviewModalOpen && <ReviewForm onCloseButtonClick={setReviewModalOpenStatus} />}
+        {isReviewModalOpen && <ReviewForm onCloseButtonClick={handleReviewCloseButtonClick} />}
       </>
   );
 }

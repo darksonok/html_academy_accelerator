@@ -29,6 +29,10 @@ function Item () {
     setChosenCameraCard(cameraCard);
   };
 
+  const handleAddItemModalCloseButtonClick = (modalStatus: boolean) => {
+    setAddItemModalOpenStatus(modalStatus);
+  };
+
   const item: Camera = useAppSelector(getOpenedCameraCard);
   const isItemLoading = useAppSelector(getOpenedCameraCardLoadingStatus);
 
@@ -90,7 +94,7 @@ function Item () {
            &&
            <AddItemModal
              cameraCard={chosenCameraCard}
-             onCloseButtonClick={setAddItemModalOpenStatus}
+             onCloseButtonClick={handleAddItemModalCloseButtonClick}
            />}
         </main>
         <a className="up-btn" href="#header">

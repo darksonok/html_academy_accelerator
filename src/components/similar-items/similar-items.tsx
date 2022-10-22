@@ -19,6 +19,12 @@ function SimilarItems ({ onAddToBusketClick }: SimilarItemsProps) {
   const handleAddToBusketClick = (camera: Camera) => {
     onAddToBusketClick(camera);
   };
+  const handleNextSlideClick = () => {
+    setShownSimilarItems(shownSimilarItems.map((item) => item + SimilarItemsParams.SimilarItemToShowStep));
+  };
+  const handlePreviousSlideClick = () => {
+    setShownSimilarItems(shownSimilarItems.map((item) => item - SimilarItemsParams.SimilarItemToShowStep));
+  };
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -58,7 +64,7 @@ function SimilarItems ({ onAddToBusketClick }: SimilarItemsProps) {
                 className="slider-controls slider-controls--prev"
                 type="button"
                 aria-label="Предыдущий слайд"
-                onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item - SimilarItemsParams.SimilarItemToShowStep))}
+                onClick={handlePreviousSlideClick}
                 disabled={shownSimilarItems[0] === SimilarItemsParams.NumberOfFirstInitialSimilarItemToShow}
               >
                 <svg width="7" height="12" aria-hidden="true">
@@ -69,7 +75,7 @@ function SimilarItems ({ onAddToBusketClick }: SimilarItemsProps) {
                 className="slider-controls slider-controls--next"
                 type="button"
                 aria-label="Следующий слайд"
-                onClick={() => setShownSimilarItems(shownSimilarItems.map((item) => item + SimilarItemsParams.SimilarItemToShowStep))}
+                onClick={handleNextSlideClick}
                 disabled={shownSimilarItems[shownSimilarItems.length - 1] === similarItems.length - 1}
               >
                 <svg width="7" height="12" aria-hidden="true">

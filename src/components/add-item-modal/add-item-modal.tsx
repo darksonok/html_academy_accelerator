@@ -3,7 +3,7 @@ import { Camera } from '../../types/Camera';
 
 type AddItemModalProps = {
   cameraCard: Camera;
-  onCloseButtonClick: React.Dispatch<React.SetStateAction<boolean>>;
+  onCloseButtonClick: (modalStatus: boolean) => void;
 }
 
 function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {

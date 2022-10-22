@@ -11,7 +11,7 @@ import { ReviewPost } from '../../../types/Review';
 import ReviewFormSuccess from './review-form-success/review-form-success';
 
 type ReviewFormProps = {
-  onCloseButtonClick: React.Dispatch<React.SetStateAction<boolean>>;
+  onCloseButtonClick: (modalStatus: boolean) => void;
 }
 
 function ReviewForm ( { onCloseButtonClick }: ReviewFormProps) {
