@@ -28,6 +28,10 @@ function Catalog () {
     setChosenCameraCard(cameraCard);
   };
 
+  const handleAddItemModalCloseButtonClick = (modalStatus: boolean) => {
+    setAddItemModalOpenStatus(modalStatus);
+  };
+
   return (
     <>
       <Header />
@@ -61,7 +65,7 @@ function Catalog () {
         &&
         <AddItemModal
           cameraCard={chosenCameraCard}
-          onCloseButtonClick={setAddItemModalOpenStatus}
+          onCloseButtonClick={handleAddItemModalCloseButtonClick}
         />}
       </main>
       <Footer />

@@ -11,6 +11,13 @@ type TabsProps = {
 function Tabs ({ item }: TabsProps) {
 
   const [activeTab, setActiveTab] = useState(TabsValues.Description);
+  const handleCharacteristicTabClick = () => {
+    setActiveTab(TabsValues.Characteristics);
+  };
+
+  const handleDescriptionTabClick = () => {
+    setActiveTab(TabsValues.Description);
+  };
 
   return (
     <div className="tabs product__tabs">
@@ -18,14 +25,14 @@ function Tabs ({ item }: TabsProps) {
         <button
           className={activeTab === TabsValues.Characteristics ? 'tabs__control is-active' : 'tabs__control'}
           type="button"
-          onClick={() => setActiveTab(TabsValues.Characteristics)}
+          onClick={handleCharacteristicTabClick}
         >
           {TabsValues.Characteristics}
         </button>
         <button
           className={activeTab === TabsValues.Description ? 'tabs__control is-active' : 'tabs__control'}
           type="button"
-          onClick={() => setActiveTab(TabsValues.Description)}
+          onClick={handleDescriptionTabClick}
         >
           {TabsValues.Description}
         </button>
