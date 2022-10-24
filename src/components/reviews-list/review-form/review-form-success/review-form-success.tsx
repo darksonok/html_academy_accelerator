@@ -42,6 +42,7 @@ function ReviewFormSuccess ({ onCloseButtonClick }: ReviewFormSuccessProps) {
               onClick={() => {
                 handleCloseButtonClick(false);
               }}
+              autoFocus
             >
               Вернуться к покупкам
             </button>

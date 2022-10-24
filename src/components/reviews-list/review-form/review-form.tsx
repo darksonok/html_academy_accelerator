@@ -138,6 +138,7 @@ function ReviewForm ( { onCloseButtonClick }: ReviewFormProps) {
                         placeholder="Введите ваше имя"
                         required
                         onChange={handleChangeEvent}
+                        autoFocus
                       />
                     </label>
                     <p className="custom-input__error">Нужно указать имя</p>

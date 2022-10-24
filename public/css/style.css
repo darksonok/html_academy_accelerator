@@ -1686,6 +1686,7 @@ button,
 
 .up-btn {
   position: sticky;
+  margin: 100px;
   left: 95%;
   bottom: 100px;
   display: -webkit-inline-box;
