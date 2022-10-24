@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Camera } from '../../types/Camera';
+import './add-item-modal.css';
 
 type AddItemModalProps = {
   cameraCard: Camera;

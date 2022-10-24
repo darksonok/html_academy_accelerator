@@ -3,6 +3,7 @@ import { AppRoute } from '../../const';
 import Banner from '../banner/banner';
 import Footer from '../footer/footer';
 import Header from '../header/header';
+import './not-found.css';
 
 function NotFound () {
   return (

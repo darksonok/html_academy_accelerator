@@ -1,6 +1,7 @@
 import { Review } from '../../../types/Review';
 import { humanizeDate } from '../../../utils';
 import Rating from '../../rating/rating';
+import './review-element.css';
 
 type ReviewProps = {
   review: Review;

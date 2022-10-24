@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import './review-form-success.css';
 
 type ReviewFormSuccessProps = {
   onCloseButtonClick: (modalStatus: boolean) => void;
