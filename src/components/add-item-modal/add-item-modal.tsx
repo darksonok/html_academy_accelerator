@@ -58,7 +58,11 @@ function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
             </div>
           </div>
           <div className="modal__buttons">
-            <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button">
+            <button
+              className="btn btn--purple modal__btn modal__btn--fit-width"
+              type="button"
+              autoFocus
+            >
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
               </svg>Добавить в корзину
