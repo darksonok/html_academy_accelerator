@@ -1,3 +1,5 @@
+import './sorter.css';
+
 function Sorter () {
   return (
     <div className="catalog-sort">

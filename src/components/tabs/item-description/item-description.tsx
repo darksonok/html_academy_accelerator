@@ -1,3 +1,5 @@
+import './item-description.css';
+
 type ItemDescriptionProps = {
   itemDescription: string;
 }

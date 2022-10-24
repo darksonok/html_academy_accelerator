@@ -1,0 +1,37 @@
+.tabs__element {
+  position: absolute;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
+  -o-transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.tabs__element.is-active {
+  z-index: 1;
+  width: 100%;
+  visibility: visible;
+  opacity: 1;
+}
+
+.product__tabs-list .item-list {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+  grid-column-gap: 20px;
+  -ms-grid-columns: 160px auto;
+  grid-template-columns: 160px auto;
+}
+
+.item-list__text {
+  margin: 0;
+}
+
+.item-list__title {
+  font-weight: 700;
+}

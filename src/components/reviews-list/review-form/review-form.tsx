@@ -9,6 +9,7 @@ import { fetchReviewsAction, postReviewAction } from '../../../store/api-actions
 import { getReviewSubmitStatus } from '../../../store/selectors';
 import { ReviewPost } from '../../../types/Review';
 import ReviewFormSuccess from './review-form-success/review-form-success';
+import './review-form.css';
 
 type ReviewFormProps = {
   onCloseButtonClick: (modalStatus: boolean) => void;

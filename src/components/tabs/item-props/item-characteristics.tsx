@@ -1,4 +1,5 @@
 import { Camera } from '../../../types/Camera';
+import './item-characteristics.css';
 
 type ItemCharacteristicsProps = {
   item: Camera;

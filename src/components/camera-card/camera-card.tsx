@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Camera } from '../../types/Camera';
 import Rating from '../rating/rating';
+import './camera-card.css';
 
 type CameraCardProps = {
   cameraCard: Camera;

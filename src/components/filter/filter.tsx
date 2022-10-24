@@ -1,3 +1,5 @@
+import './filter.css';
+
 function Filter () {
   return (
     <div className="catalog__aside">

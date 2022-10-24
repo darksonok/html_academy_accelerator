@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { TabsValues } from '../../const';
 import { Camera } from '../../types/Camera';
-import ItemDescription from './itemDescription/item-description';
-import ItemCharacteristics from './itemProps/item-characteristics';
+import ItemDescription from './item-description/item-description';
+import ItemCharacteristics from './item-props/item-characteristics';
+import './tabs.css';
 
 type TabsProps = {
   item: Camera;

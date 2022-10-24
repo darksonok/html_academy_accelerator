@@ -10,7 +10,8 @@ import { fetchReviewsAction } from '../../store/api-actions';
 import { getReviews, getReviewsLoadingStatus } from '../../store/selectors';
 import { Review } from '../../types/Review';
 import ReviewForm from './review-form/review-form';
-import ReviewElement from './review/review';
+import ReviewElement from './review/review-element';
+import './reviews-list.css';
 
 function ReviewsList () {
   const dispatch = useDispatch();

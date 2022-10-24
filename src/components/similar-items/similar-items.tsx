@@ -9,6 +9,7 @@ import { fetchSimilarCameraCardsAction } from '../../store/api-actions';
 import { getSimilarCameraCards, getSimilarCameraCardsLoadingStatus } from '../../store/selectors';
 import { Camera } from '../../types/Camera';
 import CameraCard from '../camera-card/camera-card';
+import './similar-items.css';
 
 type SimilarItemsProps = {
   onAddToBusketClick: (cameraCard: Camera) => void;
