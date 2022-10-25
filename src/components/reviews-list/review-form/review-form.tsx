@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { HumanazeRatingsMap, ReviewToShowParams, numberOfRatingStarsValue } from '../../../const';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
@@ -18,13 +18,17 @@ type ReviewFormProps = {
 function ReviewForm ( { onCloseButtonClick }: ReviewFormProps) {
   const dispatch = useAppDispatch();
   const { id } = useParams();
-
+  const firstInputRef = useRef<HTMLInputElement | null>(null);
   const handleCloseButtonClick = (modalStatus: boolean) => {
     onCloseButtonClick(modalStatus);
     store.dispatch(fetchReviewsAction(Number(id)));
     dispatch(changeSuccesfullReviewPostStatus(false));
   };
-
+  const handleLastFormElementBlur = () => {
+    if(firstInputRef.current) {
+      firstInputRef.current.focus();
+    }
+  };
   const isSubmitSuccesed = useAppSelector(getReviewSubmitStatus);
   const [formData, setFormData] = useState({
     cameraId: Number(id),
@@ -138,6 +142,7 @@ function ReviewForm ( { onCloseButtonClick }: ReviewFormProps) {
                         placeholder="Введите ваше имя"
                         required
                         onChange={handleChangeEvent}
+                        ref={firstInputRef}
                         autoFocus
                       />
                     </label>
@@ -203,6 +208,7 @@ function ReviewForm ( { onCloseButtonClick }: ReviewFormProps) {
               type="button"
               aria-label="Закрыть попап"
               onClick={() => handleCloseButtonClick(false)}
+              onBlur={handleLastFormElementBlur}
             >
               <svg width="10" height="10" aria-hidden="true">
                 <use xlinkHref="#icon-close"></use>

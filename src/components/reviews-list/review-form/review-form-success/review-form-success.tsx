@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import './review-form-success.css';
 
 type ReviewFormSuccessProps = {
@@ -6,7 +6,12 @@ type ReviewFormSuccessProps = {
 }
 
 function ReviewFormSuccess ({ onCloseButtonClick }: ReviewFormSuccessProps) {
-
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const handleLastElementBlur = () => {
+    if(buttonRef.current){
+      buttonRef.current.focus();
+    }
+  };
   const handleCloseButtonClick = (modalStatus: boolean) => {
     onCloseButtonClick(modalStatus);
   };
@@ -43,6 +48,7 @@ function ReviewFormSuccess ({ onCloseButtonClick }: ReviewFormSuccessProps) {
                 handleCloseButtonClick(false);
               }}
               autoFocus
+              ref={buttonRef}
             >
               Вернуться к покупкам
             </button>
@@ -54,6 +60,7 @@ function ReviewFormSuccess ({ onCloseButtonClick }: ReviewFormSuccessProps) {
             onClick={() => {
               handleCloseButtonClick(false);
             }}
+            onBlur={handleLastElementBlur}
           >
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Camera } from '../../types/Camera';
 import './add-item-modal.css';
 
@@ -8,7 +8,12 @@ type AddItemModalProps = {
 }
 
 function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
-
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const handleLastElementBlur = () => {
+    if(buttonRef.current) {
+      buttonRef.current.focus();
+    }
+  };
   const handleCloseButtonClick = (modalStatus: boolean) => {
     onCloseButtonClick(modalStatus);
   };
@@ -62,6 +67,7 @@ function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
               className="btn btn--purple modal__btn modal__btn--fit-width"
               type="button"
               autoFocus
+              ref={buttonRef}
             >
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
@@ -73,6 +79,7 @@ function AddItemModal ( { cameraCard, onCloseButtonClick }: AddItemModalProps) {
             type="button"
             aria-label="Закрыть попап"
             onClick={() => handleCloseButtonClick(false)}
+            onBlur={handleLastElementBlur}
           >
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
